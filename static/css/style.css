@@ -41,3 +41,9 @@ footer {
     padding: 15px;
     margin: 0 auto;
 }
+
+.truncate {
+  height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
