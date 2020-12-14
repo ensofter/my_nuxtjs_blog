@@ -5,7 +5,7 @@
         <div class="carousel-item active" style="background-color: #343a40!important">
           <div class="carousel-caption d-none d-md-block">
             <h1>
-              ХЭДЭР
+              {{ h1 }}
             </h1>
           </div>
         </div>
@@ -16,7 +16,8 @@
 
 <script>
 export default {
-  name: "Slider"
+  name: "Header",
+  props: ['h1']
 }
 </script>
 

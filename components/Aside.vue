@@ -4,46 +4,19 @@
       <h5 class="card-header">Теги</h5>
       <div class="card-body">
         <div class="d-flex flex-wrap">
-          <a href="" class="m-2 h5">#CSS</a>
-          <a href="" class="m-2 h5">#JavaScript</a>
-          <a href="" class="m-2 h5">#DRF</a>
-          <a href="" class="m-2 h5">#NuxtJS</a>
-          <a href="" class="m-2 h5">#Django</a>
-          <a href="" class="m-2 h5">#VueJS</a>
+          <nuxt-link :to="`/tags/${tag.name}`" class="m-2 h5" v-for="tag in tags" :key="tag.name">#{{tag.name}}</nuxt-link>
         </div>
       </div>
     </div>
 
     <div class="card my-4">
       <h5 class="card-header">Последние статьи</h5>
-      <div class="card-body">
-        <h5 class="card-title">Раз пост</h5>
-        <p class="card-text">Какой-то вступительный текст. Какой-то вступительный текст. Какой-то вступительный текст.</p>
-        <a href="#" class="card-link">Ссылка на статью</a>
-      </div>
-      <hr>
-      <div class="card-body">
-        <h5 class="card-title">Два пост</h5>
-        <p class="card-text">Какой-то вступительный текст. Какой-то вступительный текст. Какой-то вступительный текст.</p>
-        <a href="#" class="card-link">Ссылка на статью</a>
-      </div>
-      <hr>
-      <div class="card-body">
-        <h5 class="card-title">Три пост</h5>
-        <p class="card-text">Какой-то вступительный текст. Какой-то вступительный текст. Какой-то вступительный текст.</p>
-        <a href="#" class="card-link">Ссылка на статью</a>
-      </div>
-      <hr>
-      <div class="card-body">
-        <h5 class="card-title">Четыре пост</h5>
-        <p class="card-text">Какой-то вступительный текст. Какой-то вступительный текст. Какой-то вступительный текст.</p>
-        <a href="#" class="card-link">Ссылка на статью</a>
-      </div>
-      <hr>
-      <div class="card-body">
-        <h5 class="card-title">Пять пост</h5>
-        <p class="card-text">Какой-то вступительный текст. Какой-то вступительный текст. Какой-то вступительный текст.</p>
-        <a href="#" class="card-link">Ссылка на статью</a>
+      <div class="card-body" v-for="post in aside" :key="post.id">
+        <h5 class="card-title">{{post.h1}}</h5>
+        <img :src="post.image" alt="" class="card-img-top">
+        <div v-html="post.description" class="truncate"></div>
+        <nuxt-link :to="`/posts/${post.slug}`" class="card-link">Ссылка на статью</nuxt-link>
+        <hr>
       </div>
     </div>
   </div>
@@ -51,7 +24,8 @@
 
 <script>
 export default {
-name: "aside.vue"
+  name: "aside.vue",
+  props: ['tags', 'aside']
 }
 </script>
 
