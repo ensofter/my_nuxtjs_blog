@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Search />
+    <Search :posts="posts" @searchPosts="posts = $event"/>
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -10,7 +10,7 @@
               <li class="breadcrumb-item active" aria-current="page">Поиск</li>
             </ol>
           </nav>
-          <p class="lead">Найдено записей: 1</p>
+          <p class="lead">Найдено записей: {{posts.count}}</p>
           {{posts}}
         </div>
       </div>
@@ -27,13 +27,15 @@ export default {
   name: "search",
   data() {
     return {
-      title: "Спасибо за обращение"
+      title: "Спасибо за обращение",
+      posts: ''
     }
   },
+
   async asyncData({route}) {
     const { data } = await axios.get(`http://localhost:8000/api/posts/?search=${route.query.q}`);
     return {
-      posts: data.results,
+      posts: data,
     }
   },
 }

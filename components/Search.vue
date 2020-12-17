@@ -4,9 +4,9 @@
       <div class="carousel-inner">
         <div class="carousel-item active" style="background-color: #343a40!important">
           <div class="carousel-caption d-none d-md-block">
-            <form method="get" class="my-2 my-lg-0">
-              <input name="q" type="text" class="form-control" placeholder="Поиск" aria-label="Поиск">
-              <button class="btn btn-outline-success mt-3" type="submit">Поиск</button>
+            <form class="my-2 my-lg-0">
+              <input name="q" type="text" class="form-control" placeholder="Поиск" aria-label="Поиск" v-model="q">
+              <button class="btn btn-outline-success mt-3" @click.stop.prevent="searchPosts()">Поиск</button>
             </form>
           </div>
         </div>
@@ -16,8 +16,28 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-name: "Search"
+  name: "Search",
+  props: {
+    posts: String
+  },
+  data() {
+    return {
+      q: '',
+      posts: ''
+    }
+  },
+  methods: {
+    async searchPosts() {
+      this.posts = await axios.get(`http://localhost:8000/api/posts/?search=${this.q}`);
+      this.$router.push("/search?q="+this.q);
+      this.$emit('searchPosts', this.posts.data);
+    },
+    changeUsername() {
+
+    }
+  }
 }
 </script>
 
