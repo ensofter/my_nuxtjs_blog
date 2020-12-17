@@ -16,7 +16,7 @@
               <div class="col-md-6">
                 <div class="md-form mb-0">
                   <label for="name" class="sr-only">Ваше имя</label>
-                  <input type="text" id="name" class="form-control" placeholder="Ваше имя" v-model.trim="form.name" >
+                  <input type="text" id="name" class="form-control" placeholder="Ваше имя" v-model="form.name" >
                 </div>
               </div>
               <div class="col-md-6">
@@ -48,7 +48,7 @@
           <div class="text-center text-md-left mt-3">
             <button class="btn btn-primary" type="submit" @click.prevent="submitForm" :disabled='!isComplete'>Отправить</button>
           </div>
-        </div>
+          </div>
       </div>
     </div>
   </div>
@@ -70,35 +70,34 @@ export default {
         subject: '',
         message: '',
       }
-    }
-  },
-  methods: {
-    submitForm() {
-      let contactFormData = new FormData();
-      contactFormData.set('name', this.form.name);
-      contactFormData.set('email', this.form.email);
-      contactFormData.set('subject', this.form.subject);
-      contactFormData.set('message', this.form.message);
-      console.log('submitting data...');
-      axios({
-        method: 'post',
-        url: 'http://localhost:8000/api/feedback/',
-        data: contactFormData
-      }).then(function (response) {
-        console.log(response);
-      }).catch(function (response) {
-        console.log(response);
-      });
-      this.$router.push("/success");
-    }
-  },
-  computed: {
-    isComplete () {
-      return this.form.name && this.form.email && this.form.subject && this.form.message;
+      }
+    },
+    methods: {
+      submitForm() {
+        let contactFormData = new FormData();
+        contactFormData.set('name', this.form.name);
+        contactFormData.set('email', this.form.email);
+        contactFormData.set('subject', this.form.subject);
+        contactFormData.set('message', this.form.message);
+        axios({
+          method: 'post',
+          url: 'http://localhost:8000/api/feedback/',
+          data: contactFormData
+        }).then(function (response) {
+          console.log(response);
+        }).catch(function (response) {
+          console.log(response);
+        });
+        this.$router.push("/success");
+      }
+    },
+    computed: {
+      isComplete () {
+        return this.form.name && this.form.email && this.form.subject && this.form.message;
+      }
     }
   }
-}
-</script>
+  </script>
 
 <style scoped>
 

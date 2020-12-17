@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     submit(){
-      this.$router.push("/search?"+this.q);
+      this.$router.push("/search?q="+this.q);
     }
   }
 }

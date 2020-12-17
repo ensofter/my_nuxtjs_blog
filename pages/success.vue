@@ -1,4 +1,6 @@
 <template>
+  <div>
+    <Header :h1="title"/>
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -12,11 +14,20 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
+import Header from "@/components/Header";
 export default {
-name: "success"
+  components: {Header},
+  layout: "post_detail",
+  name: "success",
+  data() {
+    return {
+      title: "Спасибо за обращение"
+    }
+  }
 }
 </script>
 
