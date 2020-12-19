@@ -18,10 +18,6 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Search",
-  props: {
-    posts: String
-  },
   data() {
     return {
       q: '',
@@ -34,9 +30,6 @@ export default {
       this.$router.push("/search?q="+this.q);
       this.$emit('searchPosts', this.posts.data);
     },
-    changeUsername() {
-
-    }
   }
 }
 </script>

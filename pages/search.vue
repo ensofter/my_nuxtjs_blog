@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Search :posts="posts" @searchPosts="posts = $event"/>
+    <SearchHeader @searchPosts="posts = $event"/>
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -19,19 +19,17 @@
 </template>
 
 <script>
-import Search from "@/components/Search";
+import SearchHeader from "@/components/SearchHeader";
 import axios from "axios";
 export default {
-  components: {Search},
+  components: {SearchHeader},
   layout: "post_detail",
-  name: "search",
+  watchQuery: ['q'],
   data() {
     return {
-      title: "Спасибо за обращение",
       posts: ''
     }
   },
-
   async asyncData({route}) {
     const { data } = await axios.get(`http://localhost:8000/api/posts/?search=${route.query.q}`);
     return {
