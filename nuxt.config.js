@@ -39,14 +39,31 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
   ],
-
-  // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
-
-  // Build Configuration (https://go.nuxtjs.dev/config-build)
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/api/token/',
+            method: 'post',
+            propertyName: 'access',
+            altProperty: 'refresh'
+          },
+          logout: {},
+          user: false
+        }
+      }
+    },
+  },
+  // router: {
+  //   middleware: ['auth']
+  // },
+  axios: {
+    baseURL: 'http://localhost:8000'
+  },
   build: {
   }
 }

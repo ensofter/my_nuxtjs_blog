@@ -24,7 +24,7 @@
         <input name="q" v-model="q" type="text" class="form-control mr-sm-2" placeholder="Поиск" aria-label="Поиск">
         <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit" @click.stop.prevent="submit()">Поиск</button>
       </form>
-      <span class="navbar-text mr-2">Username</span>
+      <span class="navbar-text mr-2">Username {{username}}</span>
         <nuxt-link class="btn btn-outline-light mr-2" to="/signout">Выход</nuxt-link>
         <nuxt-link class="btn btn-outline-light mr-2" to="/signin">Вход</nuxt-link>
         <nuxt-link class="btn btn-outline-light mr-2" to="/signup">Регистрация</nuxt-link>
@@ -33,10 +33,13 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data(){
     return {
-      q : null
+      q : null,
+      username: this.$auth.user
     }
   },
   methods: {

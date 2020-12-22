@@ -11,7 +11,11 @@
             </ol>
           </nav>
           <p class="lead">Найдено записей: {{posts.count}}</p>
-          {{posts}}
+          <div v-for="post in posts.results" :key="post.id">
+            <nuxt-link :to="`/posts/${post.slug}`"><h2>{{ post.h1 }}</h2></nuxt-link>
+            <p v-html="post.description"></p>
+            <hr>
+          </div>
         </div>
       </div>
     </div>
