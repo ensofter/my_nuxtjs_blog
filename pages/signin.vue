@@ -2,7 +2,7 @@
   <div>
     <div class="text-center">
       <form class="form-signin" @submit.prevent="userLogin">
-        <h1 class="h3 mb-3 mt-3 font-weight-normal">Пожалуйста укажите логин и пароль {{username}}</h1>
+        <h1 class="h3 mb-3 mt-3 font-weight-normal">Пожалуйста укажите логин и пароль</h1>
         <label for="inputUsername" class="sr-only">Имя пользователя</label>
         <input id="inputUsername" class="form-control" placeholder="Имя пользователя" required="" v-model="login.username">
         <label for="inputPassword" class="sr-only">Пароль</label>
@@ -22,21 +22,16 @@ export default {
         username: '',
         password: ''
       },
-      username: this.$auth.user
     }
   },
   methods: {
     async userLogin() {
       try {
-        await this.$auth.loginWith('local', { data: this.login })
-          .then((resp) => {
-            this.$auth.setToken('local', 'Bearer ' + resp.data.access)
-            this.$auth.setRefreshToken('local', resp.data.refresh)
-            this.$axios.setHeader('Authorization', 'Bearer ' + resp.data.access)
-            this.$auth.ctx.app.$axios.setHeader('Authorization', 'Bearer ' + resp.data.access)
-            this.$axios.get('/api/profile').then((resp) => { this.$auth.setUser(resp.data.user.username); this.$router.push('/') })
-          })
+        let response = await this.$auth.loginWith('local', { data: this.login })
+        console.log(response)
+        this.$router.push('/')
       } catch (err) {
+        console.log(err)
       }
     }
   }

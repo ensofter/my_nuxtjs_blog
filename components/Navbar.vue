@@ -24,27 +24,36 @@
         <input name="q" v-model="q" type="text" class="form-control mr-sm-2" placeholder="Поиск" aria-label="Поиск">
         <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit" @click.stop.prevent="submit()">Поиск</button>
       </form>
-      <span class="navbar-text mr-2">Username {{username}}</span>
-        <nuxt-link class="btn btn-outline-light mr-2" to="/signout">Выход</nuxt-link>
+      <span class="navbar-text mr-2" v-if="user">{{user.username}}</span>
+      <client-only>
+      <span v-if="loggedIn"><nuxt-link class="btn btn-outline-light mr-2" to="/signout">Выход</nuxt-link></span>
+      <span v-else>
         <nuxt-link class="btn btn-outline-light mr-2" to="/signin">Вход</nuxt-link>
         <nuxt-link class="btn btn-outline-light mr-2" to="/signup">Регистрация</nuxt-link>
+      </span>
+      </client-only>
     </div>
   </nav>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   data(){
     return {
       q : null,
-      username: this.$auth.user
     }
   },
   methods: {
     submit(){
       this.$router.push("/search?q="+this.q);
+    }
+  },
+  computed: {
+    loggedIn() {
+      return this.$auth.loggedIn
+    },
+    user() {
+      return this.$auth.user
     }
   }
 }
