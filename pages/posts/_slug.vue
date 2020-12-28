@@ -12,7 +12,7 @@
           </nav>
           <img class="img-fluid rounded " :src="post.image" alt="">
           <hr>
-          <p v-html="post.content"></p>
+          <span v-html="post.content"></span>
           <div class="d-flex justify-content-end">
             <span v-for="tag in post.tags">
                   <nuxt-link :to="`/tags/${tag}`" class="mr-1 badge badge-info">#{{ tag }}</nuxt-link>
@@ -24,7 +24,7 @@
             <div class="p-2">Опубликовано: {{ post.created_at }}</div>
           </div>
           <hr>
-          <Comments />
+          <Comments :comments="comments" :post="post"/>
         </div>
         <Aside :tags=tags :aside=aside />
       </div>
@@ -49,10 +49,12 @@ export default {
     const post = await axios.get(`http://127.0.0.1:8000/api/posts/${params.slug}`);
     const tags = await axios.get(`http://127.0.0.1:8000/api/tags/`);
     const aside = await axios.get(`http://127.0.0.1:8000/api/aside/`);
+    const comments = await axios.get(`http://127.0.0.1:8000/api/comments/${params.slug}`);
     return {
       post: post.data,
       tags: tags.data,
       aside: aside.data,
+      comments: comments.data
     }
   },
 }

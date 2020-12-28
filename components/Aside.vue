@@ -8,7 +8,6 @@
         </div>
       </div>
     </div>
-
     <div class="card my-4">
       <h5 class="card-header">Последние статьи</h5>
       <div class="card-body" v-for="post in aside" :key="post.id">
