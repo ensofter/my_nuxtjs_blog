@@ -15,7 +15,6 @@
         <h6 class="card-header">
           <nuxt-link to="/signin">Авторизуйтесь</nuxt-link> или <nuxt-link to="/signup">зарегистрируйтесь</nuxt-link> чтобы оставить комментарий
         </h6>
-
       </div>
       </client-only>
     </div>

@@ -29,7 +29,7 @@ export default {
       try {
         let response = await this.$auth.loginWith('local', { data: this.login })
         console.log(response)
-        this.$router.push('/')
+        this.$router.back()
       } catch (err) {
         console.log(err)
       }

@@ -40,7 +40,7 @@ export default {
             password: this.register.password
           },
         })
-        this.$router.push('/')
+        this.$router.back()
       } catch (err) {
         console.log(err)
       }
