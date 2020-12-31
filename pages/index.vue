@@ -30,7 +30,7 @@
           <a class="page-link disabled" href="#" tabindex="-1">Предыдущая</a>
         </li>
         <span v-for="i in total">
-          <li  v-if="current_page === i || current_page == ''" class="page-item active">
+          <li  v-if="current_page === i || ($route.query.page === '/' && i === 1)" class="page-item active">
             <nuxt-link class="page-link" :to="`?page=${i}`">{{i}}</nuxt-link></li>
           <li v-else class="page-item">
             <nuxt-link class="page-link" :to="`?page=${i}`">{{i}}</nuxt-link></li>
@@ -59,6 +59,7 @@ export default {
     }
   },
   async asyncData({route}) {
+    console.log(route.query.page)
     let page = route.query.page !== undefined ? `?page=${route.query.page}` : '';
     const { data } = await axios.get(`http://127.0.0.1:8000/api/posts/${page}`);
     let next = data.next != null ? data.next.split('/')[5] : data.next;
