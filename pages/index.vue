@@ -73,6 +73,15 @@ export default {
       current_page: Number(current_page)
     }
   },
+  head() {
+    return {
+      title: "Главная страница блога",
+      meta: [
+        { hid: "description", name: "description", content: "Это дискрипшн тут мы пишем текст не более 250 символов."},
+        { hid: "keywords", name: "keywords", content: "keyword 1, keyword 2"},
+      ]
+    }
+  },
 }
 </script>
 

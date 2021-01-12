@@ -14,11 +14,18 @@ import Slider from "~/components/Slider";
 import Footer from "~/components/Footer";
 
 export default {
-  components: {
+    components: {
     Footer,
     Slider,
     Navbar,
-  }
+  },
+  head() {
+    return {
+      link: [
+        { rel: "canonical", href: `http://localhost:3000${this.$route.path}`}
+      ]
+    }
+  },
 };
 </script>
 
